@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weeds.openapi.mapper.UserInterfaceCountMapper">
+
+    <resultMap id="BaseResultMap" type="com.weeds.openapi.common.model.entity.UserInterfaceCount">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="interfaceId" column="interface_id" jdbcType="BIGINT"/>
+            <result property="invokeCount" column="invoke_count" jdbcType="INTEGER"/>
+            <result property="leftCount" column="left_count" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,interface_id,
+        invoke_count,left_count,status,
+        create_time,update_time,is_deleted
+    </sql>
+</mapper>

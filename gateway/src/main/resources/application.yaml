@@ -1,0 +1,48 @@
+server:
+  port: 8090
+
+spring:
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        # 不通过 Path 进行匹配
+#        - id: interface-demo-service
+#          uri: http://localhost:8280
+#          predicates:
+#            - Path=/api/**
+        # 通过 SDK 添加的请求头信息进行匹配
+        - id: interface-demo-service
+          uri: http://localhost:8280
+          predicates:
+            - Header=api_url, .*localhost:8280.*
+#        - id: host_route
+#          uri: https://example.org
+#          predicates:
+#            - Host=**.somehost.org,**.anotherhost.org
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+
+# dubbo 配置
+dubbo:
+  application:
+    name: gateway
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+    enable-file-cache: false
+  # 设置协议-协议由提供方指定消费方被动接受
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    id: gateway
+    address: nacos://localhost:8848
+  # 设置超时时间
+  consumer:
+    timeout: 4000
