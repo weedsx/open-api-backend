@@ -1,3 +1,6 @@
+# 介绍
+提供 API 接口供开发者调用的平台，基于 Spring Boot 后端 + React 前端的全栈微服务项目。管理员可以接入并发布接口、统计分析各接口调用情况；用户可以注册登绿并开通接口调用权限、浏览接口、在线调试，还能使用客户端 SDK 轻松在代码中调用接口。
+
 # SpringBoot 项目初始模板
 
 基于 SpringBoot 项目初始模板：https://github.com/weedsx/springboot-init
