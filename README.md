@@ -72,7 +72,7 @@ public class OpenApiClientConfig {
 
 开发 SDK 最后最重要的一步就是添加`META-INF/spring.factories`，内容如下：
 
-![img](\README.assets\1689763721986-0d564f91-6ff5-43a7-8ceb-cab4cbbfd102.png)
+![img](README.assets\1689763721986-0d564f91-6ff5-43a7-8ceb-cab4cbbfd102.png)
 
 ```properties
 # springboot starter
@@ -106,7 +106,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.weeds.client.
 1. 2. **形式二：编写一个过滤器加上响应装饰器**，所谓装饰器模式就是不改变原有类的基础上增加原有类的额外行为，这里 Gateway 为我们提供了响应的装饰器 `ServerHttpResponseDecorator`
       https://blog.csdn.net/qq_19636353/article/details/126759522
 
-![img](\README.assets\1690958789034-50c441c2-0da7-4cb2-859c-4cc599b307bf.png)
+![img](README.assets\1690958789034-50c441c2-0da7-4cb2-859c-4cc599b307bf.png)
 
 ## Dubbo + Nacos 进行 RPC 远程调用
 
@@ -179,4 +179,4 @@ spring:
 
 ## 网关过滤器中的 RPC 调用
 
-![img](\README.assets\1691660843965-229895e0-4e8f-4a30-82df-1ef970a49c5f.png)
+![img](README.assets\1691660843965-229895e0-4e8f-4a30-82df-1ef970a49c5f.png)
