@@ -1,6 +1,6 @@
 # 测试配置文件
 # @author <a href="https://github.com/weedsx">weeds</a>
-# 
+#
 server:
   port: 8180
 spring:
@@ -23,10 +23,10 @@ spring:
 #    password: 123456
 
 # 仅供测试，真实环境是从数据库中查询用户的 ak、sk
-open-api:
-  client:
-    access-key: weeds
-    secret-key: 123456
+# open-api:
+#   client:
+#     access-key: weeds
+#     secret-key: 123456
 
 # dubbo 配置
 dubbo:
