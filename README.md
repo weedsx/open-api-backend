@@ -1,4 +1,5 @@
 # 介绍
+
 提供 API 接口供开发者调用的平台，基于 Spring Boot 后端 + React 前端的全栈微服务项目。管理员可以接入并发布接口、统计分析各接口调用情况；用户可以注册登绿并开通接口调用权限、浏览接口、在线调试，还能使用客户端 SDK 轻松在代码中调用接口。
 
 # SpringBoot 项目初始模板
@@ -21,27 +22,13 @@
 
 ## API 签名认证
 
-如果有调用第三方接口服务的开发经历就知道，第三方服务往往会事先给出一个`key`和`secret`，然后开发者再根据第三方服务的 SDK 加上`key`和`secret`进行服务的调用，其实这个`key`和`secret`就是 API 签名认证。
+API 签名认证是一种安全机制，用于验证 API 请求的合法性。它通过使用密钥和算法为每个请求生成一个唯一的签名值，以确保数据的安全传输和访问控制。一般密钥会包含两个凭证：AK（Access Key）和 SK（Secret Key），其中 AK 用于标识用户，SK 用于加密认证字符串和验证。
 
-API签名认证的目的是防止未经授权的访问和数据篡改。当第三方应用程序向主机应用程序发送请求时，它必须使用一种加密算法将请求参数和其他必要信息组合在一起，并生成一个唯一的签名。主机应用程序收到请求后，会对签名进行验证，以确保请求没有被篡改，并且请求来自经过授权的第三方应用程序。
+本项目的具体步骤如下：
 
-通常，API签名认证涉及以下步骤：
-
-1. 获得访问凭证：第三方应用程序需要从主机应用程序获取访问凭证，通常是一个API密钥或令牌。这些凭证用于标识第三方应用程序的身份。
-2. 创建签名字符串：第三方应用程序使用请求参数和访问凭证等信息创建一个单向加密的签名字符串。
-3. 加密签名字符串：使用事先约定好的加密算法（例如HMAC-SHA1、HMAC-SHA256等），将签名字符串与私有密钥一起加密，生成最终的签名值。
-4. 发送请求：第三方应用程序将请求发送到主机应用程序，并在请求中包含生成的签名。
-5. 验证签名：主机应用程序收到请求后，会提取请求中的签名和其他相关信息，并使用相同的加密算法和事先约定的私有密钥，重新生成签名。然后，主机应用程序将新生成的签名与请求中的签名进行比较，以验证请求的完整性和真实性。
-
-
-
-**本项目的具体步骤如下：**
-
-1. 客户端（也就是本项目的 SDK）拿到自己调用 API 的 AccessKey 和 SecretKey，将客户端调用 API 要发送的数据 body + SecretKey 单向加密生成摘要，也就是签名 sign
-2. 将 AccessKey、sign、body 等数据或表示加入要调用 API 的请求头中（**一定不能带SecretKey**）
-3. API 服务端这里首先校验该用户的 AccessKey，再查出 SecretKey 并使用 SecretKey + body 生成签名 sign，与请求头的 sign 进行比对。
-
-
+1. 在服务器中获取预设好的 AK 和 SK，使用 SDK 时输入 AK 和 SK 调用接口
+2. 签名加密包含在 SDK 当中，先用 SK + 请求数据进行单向加密生成签名 sign，再将 AK、签名 sign 连同请求数据一同发给服务端
+3. 服务端会使用相同的 SK 生成签名进行比对，比对一致则认证通过处理请求，比对不一致则认证失败
 
 当然，以上只是最简单的版本，还可以在使用非对称加密对 sign 进行加密，如下：
 
@@ -49,7 +36,7 @@ API签名认证的目的是防止未经授权的访问和数据篡改。当第�
 
 <details class="lake-collapse"><summary id="uac459b6d"><strong><span class="ne-text" style="color: rgba(55,199,207,1)">加密算法分类</span></strong></summary><div data-type="color1" class="ne-alert" style="border: 1px solid #B5E8F2; background-color: #CEF1F7; margin: 4px 0; padding: 10px; border-radius: 4px"><ol class="ne-ol" style="margin: 0; padding-left: 23px"><li id="u0a235576" data-lake-index-type="0"><strong><span class="ne-text">单向加密算法（摘要算法）</span></strong><span class="ne-text">：也称为单向散列函数或哈希函数，是一类特殊的加密算法，其主要特点是只能进行单向的转换，即可以将输入数据（如文本、文件等）转换为固定长度的输出（通常称为哈希值或摘要），但无法从哈希值恢复出原始的输入数据。如：MD5（Message Digest Algorithm 5）、SHA-1（Secure Hash Algorithm 1）、SHA-256、SHA-384、SHA-512、SHA-3</span></li><li id="u0ba5dab9" data-lake-index-type="0"><strong><span class="ne-text">秘钥加密算法</span></strong><span class="ne-text">：</span></li></ol><ul class="ne-list-wrap" style="margin: 0; padding-left: 23px; list-style: none"><ul ne-level="1" class="ne-ul" style="margin: 0; padding-left: 23px; list-style: circle"><li id="u847228f5" data-lake-index-type="0"><strong><span class="ne-text">对称加密算法</span></strong><span class="ne-text">：使用相同的密钥进行加密和解密，也称为共享密钥加密。常见的对称加密算法有AES（Advanced Encryption Standard）、DES（Data Encryption Standard）和3DES等。</span></li><li id="ua2c2e4f2" data-lake-index-type="0"><strong><span class="ne-text">非对称加密算法</span></strong><span class="ne-text">：使用一对相关联的密钥，一个密钥用于加密数据（通常称公钥），另一个密钥用于解密数据（通常称私钥）。常见的非对称加密算法有RSA（Rivest-Shamir-Adleman）、ECC（Elliptic Curve Cryptography）等。</span></li></ul></ul></div></details>
 
-------
+---
 
 **开发 SDK：**
 
@@ -95,7 +82,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.weeds.client.
 
 需要注意的是，Gateway 基于 Reactor 响应式编程库，所以编码时是采用函数式异步编程形式。
 
-不同于以往同步的编码习惯，**⭐⭐过滤器的执行流程为：**
+不同于以往同步的编码习惯，**⭐⭐ 过滤器的执行流程为：**
 
 1. 请求来到网关，通过过滤器链，每个过滤器的先后顺序取决于 Order 接口，**具有最高优先级的过滤器是“前”阶段的第一个和“后”阶段的最后一个**，每个实现 GlobalFilter 接口并实现 filter 方法的类就是一个过滤器
 2. 请求通过过滤器，进入 filter 方法，整个 filter 方法直到 return 前都是过滤器对该请求还未被调用前的处理（也就是请求前置处理），最后 return 一个支持异步操作的 Mono 对象（默认为`return chain.filter(exchange);`）
@@ -103,10 +90,10 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.weeds.client.
 4. 而 Gateway 的过滤器异步就体现出来了，在请求执行的时候，此时的过滤器其实是畅通的，不是线程阻塞的，那请求结束的响应前置处理在哪呢？
 5. 响应前置处理可以以两种方式实现
 
-1. 1. **形式一：分别编写请求过滤器和响应过滤器**，单独编写一个响应过滤器，只不过该过滤器是单独处理响应的，所以自然而然可以将顺序往后靠一靠，那这个响应前置处理的逻辑写在哪呢？肯定不是 filter 方法里面吧！对也不对，应该写在 return 的 Mono 对象的异步方法`.then()`里，这里其实跟 JS 的 Promise 异步语法一样
+6. 1. **形式一：分别编写请求过滤器和响应过滤器**，单独编写一个响应过滤器，只不过该过滤器是单独处理响应的，所以自然而然可以将顺序往后靠一靠，那这个响应前置处理的逻辑写在哪呢？肯定不是 filter 方法里面吧！对也不对，应该写在 return 的 Mono 对象的异步方法`.then()`里，这里其实跟 JS 的 Promise 异步语法一样
       https://blog.csdn.net/small_to_large/article/details/125326498
 
-1. 2. **形式二：编写一个过滤器加上响应装饰器**，所谓装饰器模式就是不改变原有类的基础上增加原有类的额外行为，这里 Gateway 为我们提供了响应的装饰器 `ServerHttpResponseDecorator`
+7. 2. **形式二：编写一个过滤器加上响应装饰器**，所谓装饰器模式就是不改变原有类的基础上增加原有类的额外行为，这里 Gateway 为我们提供了响应的装饰器 `ServerHttpResponseDecorator`
       https://blog.csdn.net/qq_19636353/article/details/126759522
 
 <img src="README.assets\1690958789034-50c441c2-0da7-4cb2-859c-4cc599b307bf.png" alt="img"  />
@@ -130,11 +117,11 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.weeds.client.
 
 添加`@EnableDubbo`注解，提供服务的 Service 实现类上添加`@DubboService`
 
-------
+---
 
-**🐞Dubbo启动时qos-server can not bind localhost:22222错误解决：**
+**🐞Dubbo 启动时 qos-server can not bind localhost:22222 错误解决：**
 
-Qos=Quality of Service，qos是Dubbo的在线运维命令，可以对服务进行动态的配置、控制及查询，有时候该端口可能确实被其他软件占用，更多情况是被使用 Nacos 注册的其他服务占用了，改一下（或者直接禁用）就行：
+Qos=Quality of Service，qos 是 Dubbo 的在线运维命令，可以对服务进行动态的配置、控制及查询，有时候该端口可能确实被其他软件占用，更多情况是被使用 Nacos 注册的其他服务占用了，改一下（或者直接禁用）就行：
 
 ```yaml
 dubbo:
@@ -150,17 +137,17 @@ dubbo:
     address: nacos://localhost:8848
 ```
 
-------
+---
 
 🐞**No provider available for the service com.weeds.gateway.provider.DemoService from the url consumer 找不到服务提供者报错！**
 
 如果服务的接口没有抽成一个单独的模块，那**包名一定要相同！！！**
 
-------
+---
 
 🐞**要先启动服务提供模块，再启动服务消费模块**
 
-------
+---
 
 ## 网关的路由规则
 
