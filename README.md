@@ -6,18 +6,6 @@
 
 基于 SpringBoot 项目初始模板：https://github.com/weedsx/springboot-init
 
-# 技术栈
-
-- Spring Boot
-- MySQL
-- MyBatis Plus
-- MyBatisX
-- Redis Redisson
-- Spring Scheduler
-- Swagger
-- Knife4j
-- Gson
-
 # 技术难点
 
 ## API 签名认证
@@ -170,3 +158,15 @@ spring:
 ## 网关过滤器中的 RPC 调用
 
 <img src="README.assets\1691660843965-229895e0-4e8f-4a30-82df-1ef970a49c5f.png" alt="img"  />
+
+# 技术栈
+
+- Java Spring Boot 框架
+- MySQL 数据库
+- MyBatis-Plus 及 MyBatis X 自动生成
+- API 签名认证（Http调用）
+- Spring Boot Starter（SDK开发）
+- Dubbo 分布式（RPC、Nacos）
+- Spring Cloud Gateway 微服务网关
+- Swagger + Knife4j 接口文档生成
+- Hutool、Apache Common Utils、Gson 等工具库
