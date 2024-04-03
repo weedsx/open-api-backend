@@ -1,0 +1,18 @@
+# dubbo 配置
+dubbo:
+  application:
+    name: gateway
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+    enable-file-cache: false
+  # 设置协议-协议由提供方指定消费方被动接受
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    id: gateway
+    address: nacos://localhost:8848
+  # 设置超时时间
+  consumer:
+    timeout: 4000
