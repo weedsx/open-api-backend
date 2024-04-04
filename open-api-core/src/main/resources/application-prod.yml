@@ -1,0 +1,31 @@
+server:
+  port: 8180
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://106.15.47.33:3306/open_api
+    username: root
+    password: llh112358
+  # Redis 配置
+  redis:
+    database: 2
+    host: 106.15.47.33
+    port: 6379
+    timeout: 5000
+
+# dubbo 配置
+dubbo:
+  application:
+    name: open-api-core
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+    enable-file-cache: false
+  # 设置协议-协议由提供方指定消费方被动接受
+  protocol:
+    name: dubbo
+    port: 20880
+  registry:
+    id: open-api-core
+    address: nacos://106.15.47.33:8848
