@@ -84,6 +84,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.weeds.client.
 7. 2. **形式二：编写一个过滤器加上响应装饰器**，所谓装饰器模式就是不改变原有类的基础上增加原有类的额外行为，这里 Gateway 为我们提供了响应的装饰器 `ServerHttpResponseDecorator`
       https://blog.csdn.net/qq_19636353/article/details/126759522
 
+> 需要注意的是，这两类写法亦有区别：Mono.then 方法并不适合用于修改响应体，因为它是在响应发送给客户端之后执行的。如果您需要修改响应体，应该使用 ServerHttpResponseDecorator，装饰器的方式是在数据发送到客户端之前拦截执行的。
+
 <img src="README.assets\1690958789034-50c441c2-0da7-4cb2-859c-4cc599b307bf.png" alt="img"  />
 
 ## Dubbo + Nacos 进行 RPC 远程调用
