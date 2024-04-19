@@ -74,7 +74,7 @@ public class RequestGlobalFilter implements GlobalFilter {
         if (invokeUser == null || invokeInterfaceInfo == null) {
             return handleForbiddenResponse(response);
         }
-        // 验证
+        // 验证（处理业务）
         Mono<Void> mono = verificationRequest(request, response, invokeUser);
         if (mono != null) {
             return mono;

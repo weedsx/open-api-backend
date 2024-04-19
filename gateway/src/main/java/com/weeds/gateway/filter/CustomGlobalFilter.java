@@ -31,6 +31,7 @@ import java.util.List;
 //@Component
 @Slf4j
 @Order(-1) // 过滤器优先级，越小优先级越高
+@Deprecated // 未采用
 public class CustomGlobalFilter implements GlobalFilter {
     /**
      * IP 白名单
@@ -43,13 +44,19 @@ public class CustomGlobalFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        Mono<Void> response = processBusiness(exchange);
-        if (response != null) {
-            return response;
+        Mono<Void> responseMono = processBusiness(exchange);
+        if (responseMono != null) {
+            return responseMono;
         }
         return chain.filter(exchange);
     }
 
+    /**
+     * 负责打印请求日志、白名单比对、用户鉴权（判新ak、sk是否合法）、接口调用的记录
+     *
+     * @param exchange
+     * @return
+     */
     private static Mono<Void> processBusiness(ServerWebExchange exchange) {
         // 1.用户发送请求到AP川网关
         ServerHttpRequest request = exchange.getRequest();
