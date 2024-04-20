@@ -2,27 +2,27 @@
 
 提供 API 接口供开发者调用的平台，基于 Spring Boot 后端 + React 前端的全栈微服务项目。管理员可以接入并发布接口、统计分析各接口调用情况；用户可以注册登绿并开通接口调用权限、浏览接口、在线调试，还能使用客户端 SDK 轻松在代码中调用接口。
 
-![image-20240420181344512](.\README.assets\image-20240420181344512.png)
+<img src="README.assets\image-20240420181344512.png" alt="image-20240420181344512"  />
 
-![image-20240420181543958](D:\work\open-api-backend\README.assets\image-20240420181543958.png)
+<img src="README.assets\image-20240420181543958.png" alt="image-20240420181543958"  />
 
-![image-20240420181634658](D:\work\open-api-backend\README.assets\image-20240420181634658.png)
+<img src="README.assets\image-20240420181634658.png" alt="image-20240420181634658"  />
 
-![image-20240420181703194](D:\work\open-api-backend\README.assets\image-20240420181703194.png)
+<img src="README.assets\image-20240420181703194.png" alt="image-20240420181703194"  />
 
-![image-20240420181721513](D:\work\open-api-backend\README.assets\image-20240420181721513.png)
+<img src="README.assets\image-20240420181721513.png" alt="image-20240420181721513"  />
 
-![image-20240420181737850](D:\work\open-api-backend\README.assets\image-20240420181737850.png)
+<img src="README.assets\image-20240420181737850.png" alt="image-20240420181737850"  />
 
-![image-20240420181804301](D:\work\open-api-backend\README.assets\image-20240420181804301.png)
+<img src="README.assets\image-20240420181804301.png" alt="image-20240420181804301"  />
 
-![image-20240420181829561](D:\work\open-api-backend\README.assets\image-20240420181829561.png)
+<img src="README.assets\image-20240420181829561.png" alt="image-20240420181829561"  />
 
-![image-20240420181917025](D:\work\open-api-backend\README.assets\image-20240420181917025.png)
+<img src="README.assets\image-20240420181917025.png" alt="image-20240420181917025"  />
 
-![image-20240420182000766](D:\work\open-api-backend\README.assets\image-20240420182000766.png)
+<img src="README.assets\image-20240420182000766.png" alt="image-20240420182000766"  />
 
-![image-20240420182056069](D:\work\open-api-backend\README.assets\image-20240420182056069.png)
+<img src="README.assets\image-20240420182056069.png" alt="image-20240420182056069"  />
 
 # SpringBoot 项目初始模板
 
